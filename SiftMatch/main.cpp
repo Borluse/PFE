@@ -2,12 +2,15 @@
 #include <fstream>
 #include "rapidxml.hpp"
 #include <stdio.h>
-
+#include "ipoint.h"
+#include "match.hpp"
+#include "matchKD.h"
 
 using namespace rapidxml;
 using namespace std;
+using namespace surf;
 
-char * readFromFile(char* filename){
+char * readFromFile(const char* filename){
 	FILE * fp;
 	fp = fopen(filename, "r");
 	long size;
@@ -31,20 +34,61 @@ char * readFromFile(char* filename){
 	fclose(fp);
 	return text;
 }
+
+vector<Ipoint> readXml2Ipoint(char * text){
+    xml_document<> doc;
+	doc.parse<0>(text);
+    vector<Ipoint> pts;
+    xml_node<> *node = doc.first_node();
+    node = node->first_node("point");
+
+    do {
+        Ipoint pt;
+        char * end;
+        xml_node<> * temp = node -> first_node("x");
+        
+        pt.x = strtod(temp->value(), &end);
+        temp = node -> first_node("y");
+        pt.y = strtod(temp->value(), &end);
+        temp = node -> first_node("d");
+        pt.laplace = 0;
+        
+        int idx = 0;
+        pt.allocIvec(128);
+        do {
+            pt.ivec[idx++]= strtod(temp->value(), &end);
+        } while ((temp = temp -> next_sibling()) != NULL);
+
+        pts.push_back(pt);        
+        
+    } while ((node = node -> next_sibling()) != NULL);
+    
+    return pts;
+
+}
+
+
+
+
 int main (int argc, char * const argv[]) {
-	cout << "This is c++, welcome";
+	cout << "This is c++, welcome" << endl;
     // insert code here...
 	
-	char * text = readFromFile("temp.xml");
+	char * text = readFromFile("test.xml");
 	
-	cout << strlen(text);
+    cout<<"I have read "<< strlen(text) << " characters" << endl;
 
-	//strlen(xmltext);
-	xml_document<> doc;
-	doc.parse<0>(text);
-	
-	
-	
+    
+    vector<Ipoint> ipt1 = readXml2Ipoint(text);
+    
+    //vector< int > matches = findMatches(ipt1, ipt1);
+    
+    KD_Tree *tree = new KD_Tree(2);
+    
+    tree->create(&ipt1, 0);
+    
+    tree->printTree(NULL);
+    
     return 0;
 }
 

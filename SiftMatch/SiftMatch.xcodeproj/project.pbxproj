@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6500CB31132957970028752A /* match.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 6500CB30132957970028752A /* match.hpp */; };
+		65D9B91B1330CD8300D0A3FB /* matchKD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65D9B9191330CD8300D0A3FB /* matchKD.cpp */; };
 		65E09A791327AAE1002B98CD /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E09A781327AAE1002B98CD /* GLUT.framework */; };
 		65E09A7D1327AAEA002B98CD /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E09A7C1327AAEA002B98CD /* OpenGL.framework */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
@@ -28,10 +30,14 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		6500CB2F132957970028752A /* ipoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ipoint.h; sourceTree = "<group>"; };
+		6500CB30132957970028752A /* match.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = match.hpp; sourceTree = "<group>"; };
 		654202A2132788FC00DF16DD /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_iterators.hpp; sourceTree = "<group>"; };
 		654202A3132788FC00DF16DD /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
 		654202A4132788FC00DF16DD /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
 		654202A5132788FC00DF16DD /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
+		65D9B9191330CD8300D0A3FB /* matchKD.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = matchKD.cpp; sourceTree = "<group>"; };
+		65D9B91A1330CD8300D0A3FB /* matchKD.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = matchKD.h; sourceTree = "<group>"; };
 		65E09A781327AAE1002B98CD /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		65E09A7C1327AAEA002B98CD /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8DD76F6C0486A84900D96B5E /* SiftMatch */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SiftMatch; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +60,7 @@
 		08FB7794FE84155DC02AAC07 /* SiftMatch */ = {
 			isa = PBXGroup;
 			children = (
+				6500CB2E132957590028752A /* SURF */,
 				654202A61327890D00DF16DD /* RapidXML */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
@@ -78,6 +85,17 @@
 				8DD76F6C0486A84900D96B5E /* SiftMatch */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6500CB2E132957590028752A /* SURF */ = {
+			isa = PBXGroup;
+			children = (
+				6500CB2F132957970028752A /* ipoint.h */,
+				6500CB30132957970028752A /* match.hpp */,
+				65D9B9191330CD8300D0A3FB /* matchKD.cpp */,
+				65D9B91A1330CD8300D0A3FB /* matchKD.h */,
+			);
+			name = SURF;
 			sourceTree = "<group>";
 		};
 		654202A61327890D00DF16DD /* RapidXML */ = {
@@ -150,6 +168,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+				6500CB31132957970028752A /* match.hpp in Sources */,
+				65D9B91B1330CD8300D0A3FB /* matchKD.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,7 +187,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/bin;
-				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-lstd++",
+				);
 				PRODUCT_NAME = SiftMatch;
 				SYMROOT = ..;
 			};
@@ -180,6 +203,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-lstd++",
+				);
 				PRODUCT_NAME = SiftMatch;
 			};
 			name = Release;
