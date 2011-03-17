@@ -51,7 +51,7 @@ struct kd_node
    
    @return Returns the root of a kd tree built from \a features.
 */
-extern struct kd_node* kdtree_build( struct feature* features, int n );
+ struct kd_node* kdtree_build( struct feature* features, int n );
 
 
 
@@ -108,5 +108,16 @@ extern int kdtree_bbf_spatial_knn( struct kd_node* kd_root,
 */
 extern void kdtree_release( struct kd_node* kd_root );
 
+
+/**
+ Calculates the squared Euclidian distance between two feature descriptors.
+ 
+ @param f1 first feature
+ @param f2 second feature
+ 
+ @return Returns the squared Euclidian distance between the descriptors of
+ \a f1 and \a f2.
+ */
+extern double descr_dist_sq( struct feature* f1, struct feature* f2 );
 
 #endif

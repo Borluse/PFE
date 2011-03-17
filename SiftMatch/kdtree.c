@@ -192,7 +192,7 @@ int kdtree_bbf_spatial_knn( struct kd_node* kd_root, struct feature* feat,
 			    int k, struct feature*** nbrs, int max_nn_chks,
 			    CvRect rect, int model )
 {
-  struct feature** all_nbrs, ** sp_nbrs;
+/*  struct feature** all_nbrs, ** sp_nbrs;
   CvPoint2D64f pt;
   int i, n, t = 0;
 
@@ -215,7 +215,7 @@ int kdtree_bbf_spatial_knn( struct kd_node* kd_root, struct feature* feat,
  end:
   free( all_nbrs );
   *nbrs = sp_nbrs;
-  return t;
+  return t;*/
 }
 
 
@@ -658,3 +658,24 @@ static int within_rect( CvPoint2D64f pt, CvRect rect )
     return 0;
   return 1;
 }
+
+double descr_dist_sq( struct feature* f1, struct feature* f2 )
+{
+    double diff, dsq = 0;
+    double* descr1, * descr2;
+    int i, d;
+    
+    d = f1->d;
+    if( f2->d != d )
+        return DBL_MAX;
+    descr1 = f1->descr;
+    descr2 = f2->descr;
+    
+    for( i = 0; i < d; i++ )
+    {
+        diff = descr1[i] - descr2[i];
+        dsq += diff*diff;
+    }
+    return dsq;
+}
+

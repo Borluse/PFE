@@ -45,20 +45,20 @@ struct feature
 {
   double x;                      /**< x coord */
   double y;                      /**< y coord */
-  double a;                      /**< Oxford-type affine region parameter */
-  double b;                      /**< Oxford-type affine region parameter */
-  double c;                      /**< Oxford-type affine region parameter */
-  double scl;                    /**< scale of a Lowe-style feature */
-  double ori;                    /**< orientation of a Lowe-style feature */
+    //double a;                      /**< Oxford-type affine region parameter */
+    //  double b;                      /**< Oxford-type affine region parameter */
+    //  double c;                      /**< Oxford-type affine region parameter */
+    //  double scl;                    /**< scale of a Lowe-style feature */
+    //  double ori;                    /**< orientation of a Lowe-style feature */
   int d;                         /**< descriptor length */
   double descr[FEATURE_MAX_D];   /**< descriptor */
-  int type;                      /**< feature type, OXFD or LOWE */
-  int category;                  /**< all-purpose feature category */
+    //int type;                      /**< feature type, OXFD or LOWE */
+    //  int category;                  /**< all-purpose feature category */
   struct feature* fwd_match;     /**< matching feature from forward image */
   struct feature* bck_match;     /**< matching feature from backmward image */
   struct feature* mdl_match;     /**< matching feature from model */
-  CvPoint2D64f img_pt;           /**< location in image */
-  CvPoint2D64f mdl_pt;           /**< location in model */
+    //CvPoint2D64f img_pt;           /**< location in image */
+    //  CvPoint2D64f mdl_pt;           /**< location in model */
   void* feature_data;            /**< user-definable data */
 };
 
@@ -82,7 +82,7 @@ struct feature
    
    @return Returns the number of features imported from filename or -1 on error
 */
-extern int import_features( char* filename, int type, struct feature** feat );
+//extern int import_features( char* filename, int type, struct feature** feat );
 
 
 /**
@@ -95,7 +95,7 @@ extern int import_features( char* filename, int type, struct feature** feat );
 
    @return Returns 0 on success or 1 on error
 */
-extern int export_features( char* filename, struct feature* feat, int n );
+//extern int export_features( char* filename, struct feature* feat, int n );
 
 
 /**
@@ -105,19 +105,9 @@ extern int export_features( char* filename, struct feature* feat, int n );
    @param feat array of Oxford-type features
    @param n number of features
 */
-extern void draw_features( IplImage* img, struct feature* feat, int n );
+//extern void draw_features( IplImage* img, struct feature* feat, int n );
 
 
-/**
-   Calculates the squared Euclidian distance between two feature descriptors.
-   
-   @param f1 first feature
-   @param f2 second feature
-
-   @return Returns the squared Euclidian distance between the descriptors of
-     \a f1 and \a f2.
-*/
-extern double descr_dist_sq( struct feature* f1, struct feature* f2 );
 
 
 #endif

@@ -6,16 +6,16 @@
   @version 1.1.2-20100521
 */
 
-#include "sift.h"
+//#include "sift.h"
 #include "imgfeatures.h"
 #include "kdtree.h"
-#include "utils.h"
-#include "xform.h"
-
+//#include "utils.h"
+//#include "xform.h"
+/*
 #include <cv.h>
 #include <cxcore.h>
 #include <highgui.h>
-
+*/
 #include <stdio.h>
 
 
@@ -26,16 +26,16 @@
 #define NN_SQ_DIST_RATIO_THR 0.49
 
 
-int main( int argc, char** argv )
+int tes1t()
 {
-  IplImage* img1, * img2, * stacked;
+    // IplImage* img1, * img2, * stacked;
   struct feature* feat1, * feat2, * feat;
   struct feature** nbrs;
   struct kd_node* kd_root;
-  CvPoint pt1, pt2;
+    // CvPoint pt1, pt2;
   double d0, d1;
   int n1, n2, k, i, m = 0;
-
+/*
   if( argc != 3 )
     fatal_error( "usage: %s <img1> <img2>", argv[0] );
   
@@ -51,7 +51,7 @@ int main( int argc, char** argv )
   n1 = sift_features( img1, &feat1 );
   fprintf( stderr, "Finding features in %s...\n", argv[2] );
   n2 = sift_features( img2, &feat2 );
-  
+  */
   kd_root = kdtree_build( feat2, n2 );
   for( i = 0; i < n1; i++ )
     {
@@ -63,10 +63,10 @@ int main( int argc, char** argv )
 	  d1 = descr_dist_sq( feat, nbrs[1] );
 	  if( d0 < d1 * NN_SQ_DIST_RATIO_THR )
 	    {
-	      pt1 = cvPoint( cvRound( feat->x ), cvRound( feat->y ) );
-	      pt2 = cvPoint( cvRound( nbrs[0]->x ), cvRound( nbrs[0]->y ) );
-	      pt2.y += img1->height;
-	      cvLine( stacked, pt1, pt2, CV_RGB(255,0,255), 1, 8, 0 );
+            //pt1 = cvPoint( cvRound( feat->x ), cvRound( feat->y ) );
+            //pt2 = cvPoint( cvRound( nbrs[0]->x ), cvRound( nbrs[0]->y ) );
+            //pt2.y += img1->height;
+            //cvLine( stacked, pt1, pt2, CV_RGB(255,0,255), 1, 8, 0 );
 	      m++;
 	      feat1[i].fwd_match = nbrs[0];
 	    }
@@ -75,8 +75,8 @@ int main( int argc, char** argv )
     }
 
   fprintf( stderr, "Found %d total matches\n", m );
-  display_big_img( stacked, "Matches" );
-  cvWaitKey( 0 );
+    // display_big_img( stacked, "Matches" );
+    //cvWaitKey( 0 );
 
   /* 
      UNCOMMENT BELOW TO SEE HOW RANSAC FUNCTION WORKS
@@ -106,11 +106,11 @@ int main( int argc, char** argv )
 	cvReleaseMat( &H );
       }
   }
-  */
+  
 
   cvReleaseImage( &stacked );
   cvReleaseImage( &img1 );
-  cvReleaseImage( &img2 );
+  cvReleaseImage( &img2 );*/
   kdtree_release( kd_root );
   free( feat1 );
   free( feat2 );

@@ -12,8 +12,8 @@
 #include <cxcore.h>
 #include <highgui.h>
 
-#include <gdk/gdk.h>
-#include <gtk/gtk.h>
+//#include <gdk/gdk.h>
+//#include <gtk/gtk.h>
 
 #include <errno.h>
 #include <string.h>
@@ -275,6 +275,7 @@ extern IplImage* stack_imgs( IplImage* img1, IplImage* img2 )
   @param img an image, possibly too large to display on-screen
   @param title the title of the window in which \a img is displayed
 */
+/*
 void display_big_img( IplImage* img, char* title )
 {
   IplImage* small;
@@ -283,7 +284,7 @@ void display_big_img( IplImage* img, char* title )
   double img_aspect, scr_aspect, scale;
 
   /* determine screen size to see if image fits on screen */
-  gdk_init( NULL, NULL );
+  /* bgdk_init( NULL, NULL );
   scr = gdk_screen_get_default();
   scr_width = gdk_screen_get_width( scr );
   scr_height = gdk_screen_get_height( scr );
@@ -310,7 +311,7 @@ void display_big_img( IplImage* img, char* title )
   cvReleaseImage( &small );
 }
 
-
+*/
 
 /*
   Allows user to view an array of images as a video.  Keyboard controls
